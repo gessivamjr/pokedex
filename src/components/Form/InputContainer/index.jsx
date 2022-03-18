@@ -18,7 +18,7 @@ export default function InputContainer({onSearch}) {
                     onChangeText={setPokemonInput}
                     value={pokemonInput}
                     style={styles.input}
-                    placeholder="bulbasaur or 1"
+                    placeholder="Ex: bulbasaur or 1"
                 />
                 <TouchableOpacity
                     style={styles.input__button}

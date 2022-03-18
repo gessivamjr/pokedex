@@ -12,16 +12,16 @@ export default function App() {
         <>
             <StatusBar barStyle="light-content" backgroundColor={"#1C488D"} />
             <NavigationContainer>
-                    <PokemonProvider>
-                        <Stack.Navigator>
-                            <Stack.Screen
-                                name="Home"
-                                component={HomePage}
-                                options={{ headerShown: false }}
-                            />
-                            <Stack.Screen name="Info" component={InfoPage} />
-                        </Stack.Navigator>
-                    </PokemonProvider>
+                <PokemonProvider>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name="Home"
+                            component={HomePage}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen name="About" component={InfoPage} />
+                    </Stack.Navigator>
+                </PokemonProvider>
             </NavigationContainer>
         </>
     );

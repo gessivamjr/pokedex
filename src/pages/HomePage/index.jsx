@@ -6,7 +6,7 @@ import InputContainer from "../../components/Form/InputContainer";
 import FilterContainer from "../../components/Form/FilterContainer";
 import styles from "./style";
 
-async function getPokemonData(pokemon) {
+async function getPokemon(pokemon) {
     const pokedex = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}/`
     );
@@ -14,11 +14,11 @@ async function getPokemonData(pokemon) {
     return pokemonData;
 }
 
-async function getPokemonType(type) {
+async function getPokemonTypeList(type) {
     const poketype = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
     const typeData = await poketype.json();
-    const pokemonType = typeData.pokemon;
-    return pokemonType;
+    const pokemonTypeList = typeData.pokemon;
+    return pokemonTypeList;
 }
 
 export default function HomePage({ navigation }) {
@@ -27,16 +27,16 @@ export default function HomePage({ navigation }) {
     const [pokemonUnique, setPokemonUnique] = useState("");
 
     function searchButton() {
-        getPokemonData(pokemonInput).then((pokemonData) => {
+        getPokemon(pokemonInput).then((pokemonData) => {
             setPokemonsList([]);
             setPokemonUnique(pokemonData);
         });
     }
 
     function queryType(type) {
-        getPokemonType(type).then((pokemonType) => {
+        getPokemonTypeList(type).then((pokemonTypeList) => {
             setPokemonUnique("");
-            setPokemonsList(pokemonType);
+            setPokemonsList(pokemonTypeList);
         });
     }
 
@@ -48,21 +48,45 @@ export default function HomePage({ navigation }) {
                 <FilterContainer onQuery={queryType} />
             </View>
             {pokemonUnique ? (
-                <Pressable>
-                    <Text>{pokemonUnique.name}</Text>
-                </Pressable>
+                <>
+                    <Text style={styles.item__title}>Pokemon:</Text>
+                    <Pressable
+                        style={styles.item__card}
+                        onPress={() =>
+                            navigation.push("About", {
+                                name: pokemonUnique.name,
+                            })
+                        }
+                    >
+                        <Text style={styles.item__label}>
+                            {pokemonUnique.name}
+                        </Text>
+                    </Pressable>
+                </>
             ) : (
-                <FlatList
-                    data={pokemonsList}
-                    renderItem={({ item }) => {
-                        return (
-                            <Pressable>
-                                <Text>{item.pokemon.name}</Text>
-                            </Pressable>
-                        );
-                    }}
-                    keyExtractor={(item) => item.name}
-                />
+                <>
+                    <Text style={styles.item__title}>Pokemons:</Text>
+                    <FlatList
+                        data={pokemonsList}
+                        renderItem={({ item }) => {
+                            return (
+                                <Pressable
+                                    style={styles.item__card}
+                                    onPress={() =>
+                                        navigation.push("About", {
+                                            name: item.pokemon.name,
+                                        })
+                                    }
+                                >
+                                    <Text style={styles.item__label}>
+                                        {item.pokemon.name}
+                                    </Text>
+                                </Pressable>
+                            );
+                        }}
+                        keyExtractor={(item) => item.pokemon.name}
+                    />
+                </>
             )}
         </SafeAreaView>
     );

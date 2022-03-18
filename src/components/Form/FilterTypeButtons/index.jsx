@@ -2,81 +2,60 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 
-const Button = ({
-    label,
-    bug,
-    electric,
-    fire,
-    grass,
-    normal,
-    rock,
-    dark,
-    fairy,
-    flying,
-    ground,
-    poison,
-    steel,
-    dragon,
-    fighting,
-    ghost,
-    ice,
-    psychic,
-    water,
-    onQuery,
-}) => {
+const Button = ({ label, onQuery }) => {
     const stylesButtons = [styles.button];
-    if (bug) {
+    if (label === "bug") {
         stylesButtons.push(styles.bug);
     }
-    if (electric) {
+    if (label === "electric") {
         stylesButtons.push(styles.electric);
     }
-    if (fire) {
+    if (label === "fire") {
         stylesButtons.push(styles.fire);
     }
-    if (grass) {
+    if (label === "grass") {
         stylesButtons.push(styles.grass);
     }
-    if (normal) {
+    if (label === "normal") {
         stylesButtons.push(styles.normal);
     }
-    if (rock) {
+    if (label === "rock") {
         stylesButtons.push(styles.rock);
     }
-    if (dark) {
+    if (label === "dark") {
         stylesButtons.push(styles.dark);
     }
-    if (fairy) {
+    if (label === "fairy") {
         stylesButtons.push(styles.fairy);
     }
-    if (flying) {
+    if (label === "flying") {
         stylesButtons.push(styles.flying);
     }
-    if (ground) {
+    if (label === "ground") {
         stylesButtons.push(styles.ground);
     }
-    if (poison) {
+    if (label === "poison") {
         stylesButtons.push(styles.poison);
     }
-    if (steel) {
+    if (label === "steel") {
         stylesButtons.push(styles.steel);
     }
-    if (dragon) {
+    if (label === "dragon") {
         stylesButtons.push(styles.dragon);
     }
-    if (fighting) {
+    if (label === "fighting") {
         stylesButtons.push(styles.fighting);
     }
-    if (ghost) {
+    if (label === "ghost") {
         stylesButtons.push(styles.ghost);
     }
-    if (ice) {
+    if (label === "ice") {
         stylesButtons.push(styles.ice);
     }
-    if (psychic) {
+    if (label === "psychic") {
         stylesButtons.push(styles.psychic);
     }
-    if (water) {
+    if (label === "water") {
         stylesButtons.push(styles.water);
     }
 
@@ -91,30 +70,30 @@ export default function FilterTypeButtons({ onQuery }) {
     return (
         <View style={styles.button__container}>
             <View style={styles.button__line}>
-                <Button label={"bug"} bug onQuery={onQuery}/>
-                <Button label={"electric"} electric onQuery={onQuery}/>
-                <Button label={"fire"} fire onQuery={onQuery}/>
-                <Button label={"grass"} grass onQuery={onQuery}/>
-                <Button label={"normal"} normal onQuery={onQuery}/>
+                <Button label={"bug"} onQuery={onQuery} />
+                <Button label={"electric"} onQuery={onQuery} />
+                <Button label={"fire"} onQuery={onQuery} />
+                <Button label={"grass"} onQuery={onQuery} />
+                <Button label={"normal"} onQuery={onQuery} />
             </View>
             <View style={styles.button__line}>
-                <Button label={"rock"} rock onQuery={onQuery}/>
-                <Button label={"dark"} dark onQuery={onQuery}/>
-                <Button label={"fairy"} fairy onQuery={onQuery}/>
-                <Button label={"flying"} flying onQuery={onQuery}/>
-                <Button label={"ground"} ground onQuery={onQuery}/>
+                <Button label={"rock"} onQuery={onQuery} />
+                <Button label={"dark"} onQuery={onQuery} />
+                <Button label={"fairy"} onQuery={onQuery} />
+                <Button label={"flying"} onQuery={onQuery} />
+                <Button label={"ground"} onQuery={onQuery} />
             </View>
             <View style={styles.button__line}>
-                <Button label={"poison"} poison onQuery={onQuery}/>
-                <Button label={"steel"} steel onQuery={onQuery}/>
-                <Button label={"dragon"} dragon onQuery={onQuery}/>
-                <Button label={"fighting"} fighting onQuery={onQuery}/>
-                <Button label={"ghost"} ghost onQuery={onQuery}/>
+                <Button label={"poison"} onQuery={onQuery} />
+                <Button label={"steel"} onQuery={onQuery} />
+                <Button label={"dragon"} onQuery={onQuery} />
+                <Button label={"fighting"} onQuery={onQuery} />
+                <Button label={"ghost"} onQuery={onQuery} />
             </View>
             <View style={styles.button__lineLast}>
-                <Button label={"ice"} ice onQuery={onQuery}/>
-                <Button label={"psychic"} psychic onQuery={onQuery}/>
-                <Button label={"water"} water onQuery={onQuery}/>
+                <Button label={"ice"} onQuery={onQuery} />
+                <Button label={"psychic"} onQuery={onQuery} />
+                <Button label={"water"} onQuery={onQuery} />
             </View>
         </View>
     );
