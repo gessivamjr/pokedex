@@ -58,9 +58,9 @@ export default function HomePage({ navigation }) {
                     <FilterContainer onQuery={queryType} />
                 </View>
             </Pressable>
+            <Text style={styles.item__title}>Result:</Text>
             {pokemonUnique ? (
                 <>
-                    <Text style={styles.item__title}>Pokemon:</Text>
                     <Pressable
                         style={styles.item__card}
                         onPress={() =>
@@ -76,7 +76,6 @@ export default function HomePage({ navigation }) {
                 </>
             ) : (
                 <>
-                    <Text style={styles.item__title}>Pokemons:</Text>
                     <FlatList
                         data={pokemonsList}
                         renderItem={({ item }) => {
