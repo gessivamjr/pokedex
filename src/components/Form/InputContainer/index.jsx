@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { PokemonContext } from "../../PokemonContext";
+import { PokemonContext } from "../../Contexts";
 import styles from "./style";
 
-export default function InputContainer({onSearch}) {
+export default function InputContainer({ onSearch }) {
     const [pokemonInput, setPokemonInput] = useContext(PokemonContext);
 
     return (

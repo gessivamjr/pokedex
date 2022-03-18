@@ -34,7 +34,7 @@ export default function InfoPage({ route }) {
                 <Image
                     style={styles.pokemon__sprite}
                     source={{
-                        uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${paramsPokemon}.png`,
+                        uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${paramsPokemon.id}.png`,
                     }}
                 />
             </View>

@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
     input__container: {
         alignItems: "center",
         width: "100%",
-        marginBottom: 10,
     },
     input__label: {
         fontSize: 24,

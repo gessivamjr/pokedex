@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     info__container: {
         flex: 1,
         paddingTop: Platform.OS === "android" ? 40 : 0,
-        backgroundColor: "#f6f6f6",
+        backgroundColor: "#fff",
     },
     sprite__container: {
         alignItems: "center",

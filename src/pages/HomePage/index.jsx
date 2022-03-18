@@ -1,6 +1,13 @@
 import React, { useContext, useState } from "react";
-import { SafeAreaView, View, FlatList, Pressable, Text } from "react-native";
-import { PokemonContext } from "../../components/PokemonContext";
+import {
+    SafeAreaView,
+    View,
+    FlatList,
+    Pressable,
+    Text,
+    Keyboard,
+} from "react-native";
+import { PokemonContext } from "../../components/Contexts";
 import Logo from "../../components/Logo";
 import InputContainer from "../../components/Form/InputContainer";
 import FilterContainer from "../../components/Form/FilterContainer";
@@ -29,7 +36,9 @@ export default function HomePage({ navigation }) {
     function searchButton() {
         getPokemon(pokemonInput).then((pokemonData) => {
             setPokemonsList([]);
+            setPokemonInput("");
             setPokemonUnique(pokemonData);
+            Keyboard.dismiss();
         });
     }
 
@@ -42,11 +51,13 @@ export default function HomePage({ navigation }) {
 
     return (
         <SafeAreaView style={styles.home__container}>
-            <Logo />
-            <View style={styles.form__container}>
-                <InputContainer onSearch={searchButton} />
-                <FilterContainer onQuery={queryType} />
-            </View>
+            <Pressable onPress={() => Keyboard.dismiss()}>
+                <Logo />
+                <View style={styles.form__container}>
+                    <InputContainer onSearch={searchButton} />
+                    <FilterContainer onQuery={queryType} />
+                </View>
+            </Pressable>
             {pokemonUnique ? (
                 <>
                     <Text style={styles.item__title}>Pokemon:</Text>

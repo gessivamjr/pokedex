@@ -1,7 +1,10 @@
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PokemonProvider from "./src/components/PokemonContext";
+import {
+    PokemonProvider,
+    ErrorProvider,
+} from "./src/components/Contexts";
 import HomePage from "./src/pages/HomePage";
 import InfoPage from "./src/pages/InfoPage";
 
@@ -13,14 +16,16 @@ export default function App() {
             <StatusBar barStyle="light-content" backgroundColor={"#1C488D"} />
             <NavigationContainer>
                 <PokemonProvider>
-                    <Stack.Navigator>
-                        <Stack.Screen
-                            name="Home"
-                            component={HomePage}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen name="About" component={InfoPage} />
-                    </Stack.Navigator>
+                    <ErrorProvider>
+                        <Stack.Navigator>
+                            <Stack.Screen
+                                name="Home"
+                                component={HomePage}
+                                options={{ headerShown: false }}
+                            />
+                            <Stack.Screen name="About" component={InfoPage} />
+                        </Stack.Navigator>
+                    </ErrorProvider>
                 </PokemonProvider>
             </NavigationContainer>
         </>

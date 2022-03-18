@@ -5,11 +5,15 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: Platform.OS === "android" ? 40 : 0,
         alignItems: "center",
-        backgroundColor: "#E6E6E6",
+        backgroundColor: "#fff",
     },
     form__container: {
         alignItems: "center",
         width: "100%",
+        padding: 10,
+        borderTopColor: "#E6E6E6",
+        borderBottomColor: "#E6E6E6",
+        borderWidth: 15,
     },
     item__title: {
         marginTop: 20,
