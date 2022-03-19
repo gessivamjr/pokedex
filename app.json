@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1C488D"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,8 +22,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#1C488D"
+      },
+      "package": "com.gessivamjr.pokedex",
+      "versionCode": 1 
     },
     "web": {
       "favicon": "./assets/favicon.png"
