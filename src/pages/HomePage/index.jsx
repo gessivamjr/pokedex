@@ -7,13 +7,13 @@ import {
     Text,
     Keyboard,
 } from "react-native";
-import { PokemonContext } from "../../components/Contexts";
+import { PokemonInputContext, PokemonContext } from "../../components/Contexts";
 import Logo from "../../components/Logo";
 import InputContainer from "../../components/Form/InputContainer";
 import FilterContainer from "../../components/Form/FilterContainer";
 import styles from "./style";
 
-async function getPokemon(pokemon) {
+export async function getPokemon(pokemon) {
     const pokedex = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}/`
     );
@@ -22,30 +22,38 @@ async function getPokemon(pokemon) {
 }
 
 async function getPokemonTypeList(type) {
-    const poketype = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
-    const typeData = await poketype.json();
-    const pokemonTypeList = typeData.pokemon;
-    return pokemonTypeList;
+    const pokedextype = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    const typeData = await pokedextype.json();
+    const pokemonTypeListData = typeData.pokemon;
+    return pokemonTypeListData;
 }
 
 export default function HomePage({ navigation }) {
-    const [pokemonInput, setPokemonInput] = useContext(PokemonContext);
-    const [pokemonsList, setPokemonsList] = useState([]);
-    const [pokemonUnique, setPokemonUnique] = useState("");
+    const [pokemonInput, setPokemonInput] = useContext(PokemonInputContext);
+    const [pokemonsListResult, setPokemonsListResult] = useState([]);
+    const [pokemonResult, setPokemonResult] = useContext(PokemonContext);
+    const [errorMessage, setErrorMessage] = useState("");
 
     function searchButton() {
-        getPokemon(pokemonInput).then((pokemonData) => {
-            setPokemonsList([]);
+        if (pokemonInput !== "" && pokemonInput !== "0") {
+            getPokemon(pokemonInput).then((pokemonData) => {
+                setPokemonsListResult([]);
+                setPokemonInput("");
+                setErrorMessage("");
+                setPokemonResult(pokemonData);
+                Keyboard.dismiss();
+            });
+        } else {
             setPokemonInput("");
-            setPokemonUnique(pokemonData);
-            Keyboard.dismiss();
-        });
+            setPokemonResult("");
+            setErrorMessage("*Busca inválida");
+        }
     }
 
     function queryType(type) {
-        getPokemonTypeList(type).then((pokemonTypeList) => {
-            setPokemonUnique("");
-            setPokemonsList(pokemonTypeList);
+        getPokemonTypeList(type).then((pokemonTypeListData) => {
+            setPokemonResult("");
+            setPokemonsListResult(pokemonTypeListData);
         });
     }
 
@@ -54,30 +62,33 @@ export default function HomePage({ navigation }) {
             <Pressable onPress={() => Keyboard.dismiss()}>
                 <Logo />
                 <View style={styles.form__container}>
-                    <InputContainer onSearch={searchButton} />
+                    <InputContainer
+                        onSearch={searchButton}
+                        errorMessage={errorMessage}
+                    />
                     <FilterContainer onQuery={queryType} />
                 </View>
             </Pressable>
             <Text style={styles.item__title}>Result:</Text>
-            {pokemonUnique ? (
+            {pokemonResult ? (
                 <>
                     <Pressable
                         style={styles.item__card}
                         onPress={() =>
                             navigation.push("About", {
-                                name: pokemonUnique.name,
+                                name: pokemonResult.name,
                             })
                         }
                     >
                         <Text style={styles.item__label}>
-                            {pokemonUnique.name}
+                            {pokemonResult.name}
                         </Text>
                     </Pressable>
                 </>
             ) : (
                 <>
                     <FlatList
-                        data={pokemonsList}
+                        data={pokemonsListResult}
                         renderItem={({ item }) => {
                             return (
                                 <Pressable

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import {
     SafeAreaView,
     View,
@@ -6,24 +6,20 @@ import {
     Image,
     FlatList,
 } from "react-native";
+import { PokemonContext } from "../../components/Contexts";
 import Logo from "../../components/Logo";
 import TypeInfo from "../../components/TypeInfo";
+import { getPokemon } from "../HomePage";
 import styles from "./style";
 
-async function getParamsData(pokemon) {
-    const params = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}/`);
-    const paramsData = await params.json();
-    return paramsData;
-}
-
 export default function InfoPage({ route }) {
-    const [paramsPokemon, setParamsPokemon] = useState("");
-    const nameProps = route.params.name;
-    const typesList = paramsPokemon.types;
+    const [pokemonResult, setPokemonResult] = useContext(PokemonContext);
+    const typesList = pokemonResult.types;
+    const nameParams = route.params.name;
 
     useEffect(() => {
-        getParamsData(nameProps).then((paramsData) =>
-            setParamsPokemon(paramsData)
+        getPokemon(nameParams).then((pokemonData) =>
+            setPokemonResult(pokemonData)
         );
     }, []);
 
@@ -34,7 +30,7 @@ export default function InfoPage({ route }) {
                 <Image
                     style={styles.pokemon__sprite}
                     source={{
-                        uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${paramsPokemon.id}.png`,
+                        uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonResult.id}.png`,
                     }}
                 />
             </View>
@@ -42,12 +38,12 @@ export default function InfoPage({ route }) {
                 <Text style={styles.pokemon__label}>
                     Name:{" "}
                     <Text style={styles.pokemon__name}>
-                        {paramsPokemon.name}
+                        {pokemonResult.name}
                     </Text>
                 </Text>
                 <Text style={styles.pokemon__label}>
                     ID:{" "}
-                    <Text style={styles.pokemon__id}>{paramsPokemon.id}</Text>
+                    <Text style={styles.pokemon__id}>{pokemonResult.id}</Text>
                 </Text>
                 <FlatList
                     data={typesList}

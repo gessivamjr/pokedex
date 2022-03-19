@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
     PokemonProvider,
-    ErrorProvider,
+    PokemonInputProvider,
 } from "./src/components/Contexts";
 import HomePage from "./src/pages/HomePage";
 import InfoPage from "./src/pages/InfoPage";
@@ -16,7 +16,7 @@ export default function App() {
             <StatusBar barStyle="light-content" backgroundColor={"#1C488D"} />
             <NavigationContainer>
                 <PokemonProvider>
-                    <ErrorProvider>
+                    <PokemonInputProvider>
                         <Stack.Navigator>
                             <Stack.Screen
                                 name="Home"
@@ -25,7 +25,7 @@ export default function App() {
                             />
                             <Stack.Screen name="About" component={InfoPage} />
                         </Stack.Navigator>
-                    </ErrorProvider>
+                    </PokemonInputProvider>
                 </PokemonProvider>
             </NavigationContainer>
         </>

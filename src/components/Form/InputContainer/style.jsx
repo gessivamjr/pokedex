@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: "80%",
-        marginBottom: 10,
         marginRight: 10,
         padding: 10,
         paddingLeft: 25,
@@ -31,6 +30,13 @@ const styles = StyleSheet.create({
     },
     input__button: {
         marginBottom: 7.5,
+    },
+    error__container: {
+        marginBottom: 10,
+    },
+    error: {
+        fontSize: 14,
+        color: "#f00",
     },
 });
 

@@ -1,25 +1,23 @@
 import React, { useState, createContext } from "react";
 
-export const PokemonContext = createContext();
-
-export function PokemonProvider({ children }) {
+export const PokemonInputContext = createContext();
+export function PokemonInputProvider({ children }) {
     const [pokemonInput, setPokemonInput] = useState("");
 
     return (
-        <PokemonContext.Provider value={[pokemonInput, setPokemonInput]}>
+        <PokemonInputContext.Provider value={[pokemonInput, setPokemonInput]}>
             {children}
-        </PokemonContext.Provider>
+        </PokemonInputContext.Provider>
     );
 }
 
-export const ErrorContext = createContext();
-
-export function ErrorProvider({ children }) {
-    const [errorMessage, setErrorMessage] = useState("");
+export const PokemonContext = createContext();
+export function PokemonProvider({ children }) {
+    const [pokemonResult, setPokemonResult] = useState("");
 
     return (
-        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+        <PokemonContext.Provider value={[pokemonResult, setPokemonResult]}>
             {children}
-        </ErrorContext.Provider>
+        </PokemonContext.Provider>
     );
 }
