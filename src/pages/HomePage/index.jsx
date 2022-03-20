@@ -36,13 +36,21 @@ export default function HomePage({ navigation }) {
 
     function searchButton() {
         if (pokemonInput !== "" && pokemonInput !== "0") {
-            getPokemon(pokemonInput).then((pokemonData) => {
-                setPokemonsListResult([]);
-                setPokemonInput("");
-                setErrorMessage("");
-                setPokemonResult(pokemonData);
-                Keyboard.dismiss();
-            });
+            getPokemon(pokemonInput)
+                .then((pokemonData) => {
+                    setPokemonsListResult([]);
+                    setPokemonInput("");
+                    setErrorMessage("");
+                    setPokemonResult(pokemonData);
+                    Keyboard.dismiss();
+                })
+                .catch((error) => {
+                    if (error) {
+                        setErrorMessage("Pokemon não encontrado");
+                        setPokemonInput("");
+                        setPokemonResult("");
+                    }
+                });
         } else {
             setPokemonInput("");
             setPokemonResult("");
