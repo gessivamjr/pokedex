@@ -1,6 +1,5 @@
 # Pokedéx
-
-![Home](./assets/print1.png) ![About](./assets/print2.png)
+<img src="./assets/print1.png" width="400" height="800" alt="Home" /> <img src="./assets/print2.png" width="400" height="800" alt="About" />
 
 # Sobre
 O app da pokedéx foi construído em React Native com Expo, faz uso da lib React-Navigation para navegação entre telas e Context API como gerenciador de estados. Além disso, toda consulta de dados é feita na PokeAPI, uma API pública e grátis com uma imensidão de dados a respeito de Pokemon.
